@@ -1,0 +1,54 @@
+.icon {
+  background: linear-gradient(to right, #bfe9ff, #ff6e7f);
+  height: 40px;
+  width: 120px;
+  border-radius: 50px;
+
+  text-align: center;
+  line-height: 40px;
+}
+.left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.NavBar {
+  height: 96px;
+  width: 100vw;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  box-shadow: 1px 1px 10px 10px rgba(0, 0, 0, 0.1);
+}
+
+.search {
+  width: 50vw;
+  height: 30px;
+  border-radius: 10px;
+  background-color: #ffffff;
+}
+
+.infoWrapper {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.name {
+  font-weight: bold;
+  font-size: 16px;
+}
+.money {
+  font-size: 14px;
+  color: #000000;
+}
+
+.photo {
+  border-radius: 50px;
+}
+
+.status {
+  font-size: 14px;
+  color: #828282;
+}

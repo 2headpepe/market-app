@@ -1,15 +1,15 @@
 import { Link } from "react-router-dom";
-
-import "./LandingPage.css";
+// import {SearchOutlined} from "antd";
+import styles from "./LandingPage.module.css";
+import Header from "./components/Header/Header";
+import Main from "./components/Main/Main";
 
 const LandingPage: React.FC = () => {
   return (
-    <div className="LandingPage">
-      <h1>Landing Page</h1>
-      <nav className="Navbar">
-        <Link to="/login">Login</Link>
-        <Link to="/register">Register</Link>
-      </nav>
+    <div className={styles.LandingPage}>
+      <Header></Header>
+      <Main></Main>
+      {}
     </div>
   );
 };
