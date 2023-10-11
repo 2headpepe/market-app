@@ -5,12 +5,11 @@ import { Link } from "react-router-dom";
 
 import styles from "./RegisterPage.module.css";
 
-const RegisterPage: React.FC = () => {
+function RegisterPage(props: { param: string }) {
+  console.log(props);
   return (
     <div className={styles.RegisterPage}>
       <div className={styles.formWrapper}>
-        <h1>Register</h1>
-
         <Form layout="vertical">
           <Form.Item
             label="First Name"
@@ -68,6 +67,6 @@ const RegisterPage: React.FC = () => {
       </div>
     </div>
   );
-};
+}
 
 export default RegisterPage;

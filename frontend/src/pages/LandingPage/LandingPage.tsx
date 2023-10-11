@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 // import {SearchOutlined} from "antd";
 import styles from "./LandingPage.module.css";
-import Header from "./components/Header/Header";
+import Header from "../../components/Header/Header";
 import Main from "./components/Main/Main";
 
 const LandingPage: React.FC = () => {
@@ -9,7 +9,6 @@ const LandingPage: React.FC = () => {
     <div className={styles.LandingPage}>
       <Header></Header>
       <Main></Main>
-      {}
     </div>
   );
 };

@@ -5,7 +5,9 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import LandingPage from "./pages/LandingPage/LandingPage";
+// import {root} from '.';
 import reportWebVitals from "./reportWebVitals";
+import ProfilePage from "./pages/ProfilePage/ProfilePage";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -16,15 +18,19 @@ root.render(
       <Routes>
         <Route
           path="register"
-          element={<RegisterPage />}
+          element={<RegisterPage param={"1"} />}
         ></Route>
         <Route
           path="login"
           element={<LoginPage />}
         ></Route>
         <Route
-          path=""
+          path="*"
           element={<LandingPage />}
+        ></Route>
+        <Route
+          path="profile"
+          element={<ProfilePage />}
         ></Route>
       </Routes>
     </BrowserRouter>

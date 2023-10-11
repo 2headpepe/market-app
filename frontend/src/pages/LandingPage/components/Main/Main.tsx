@@ -1,8 +1,9 @@
 import React from "react";
-import Card from "../Card/Card";
-import data from "../../data.js";
+import Card from "../../../../components/Card/Card";
+import data from "../../../../data";
 import Select from "react-select";
 import styles from "./Main.module.css";
+import PostList from "../../../../components/PostList";
 const options = [
   { value: "1", label: "1" },
   { value: "2", label: "2" },
@@ -27,7 +28,7 @@ const Main = () => {
   for (let i = 1; i <= pageNumber; ++i) {
     pages.push(i);
   }
-
+  console.log(posts);
   return (
     <div className={styles.mainWrapper}>
       <div className={styles.sortWrapper}>
@@ -49,13 +50,9 @@ const Main = () => {
           id="filterSelect"
         />
       </div>
-
-      {posts.length > 0 ? (
-        posts.map((e) => <Card {...e}></Card>)
-      ) : (
-        <div>Нет постов</div>
-      )}
-
+      <div className={styles.postListWrapper}>
+        <PostList posts={posts}></PostList>
+      </div>
       {pages.map((e) => (
         <span>{e} </span>
       ))}

@@ -1,7 +1,15 @@
 import "./Card.css";
-
-function Card(props) {
-  const { imageUrl, location, title, startDate, description, price } = props;
+interface CardProps {
+  id: number;
+  title: string;
+  location: string;
+  date: string;
+  description: string;
+  imageUrl: string;
+  price: number;
+}
+function Card(props: CardProps) {
+  const { imageUrl, location, title, date, description, price } = props;
   return (
     <div className="Card--wrapper">
       <img
@@ -17,7 +25,7 @@ function Card(props) {
             className="Card--location--icon"
           />
           <p className="Card--location--text">{location}</p>
-          <p className="Card--dates">{startDate}</p>
+          <p className="Card--dates">{date}</p>
         </div>
 
         <h3 className="Card--name">{title}</h3>
