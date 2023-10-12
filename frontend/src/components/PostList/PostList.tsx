@@ -1,5 +1,7 @@
 import React from "react";
-import Card from "./Card/Card";
+import Card from "../Card/Card";
+import styles from "./PostList.module.css";
+
 interface PostListProps {
   posts: {
     id: number;
@@ -15,10 +17,12 @@ interface PostListProps {
 const PostList = ({ posts }: PostListProps) => {
   console.log(posts);
   return (
-    <div>
+    <div className={styles.listWrapper}>
       {posts.length > 0 ? (
         posts.map((e) => (
-          <div style={{ marginBottom: "45px" }}>
+          <div
+            className={styles.postWrapper}
+          >
             <Card {...e}></Card>
           </div>
         ))

@@ -5,8 +5,7 @@ import { Link } from "react-router-dom";
 
 import styles from "./RegisterPage.module.css";
 
-function RegisterPage(props: { param: string }) {
-  console.log(props);
+function RegisterPage() {
   return (
     <div className={styles.RegisterPage}>
       <div className={styles.formWrapper}>

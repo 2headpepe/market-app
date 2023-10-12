@@ -3,7 +3,7 @@ import Card from "../../../../components/Card/Card";
 import data from "../../../../data";
 import Select from "react-select";
 import styles from "./Main.module.css";
-import PostList from "../../../../components/PostList";
+import PostList from "../../../../components/PostList/PostList";
 const options = [
   { value: "1", label: "1" },
   { value: "2", label: "2" },
