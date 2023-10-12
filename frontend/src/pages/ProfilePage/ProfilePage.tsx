@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./ProfilePage.module.css";
 import data from "../../data.js";
-import PostList from "../../components/PostList";
+import PostList from "../../components/PostList/PostList";
 import { MoreOutlined } from "@ant-design/icons";
 import Star from "../../components/Star/Star";
 import Card from "../../components/Card/Card";
