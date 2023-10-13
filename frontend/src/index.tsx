@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import LandingPage from "./pages/LandingPage/LandingPage";
@@ -18,18 +18,20 @@ import { Provider, useSelector } from "react-redux";
 import { store } from "./store";
 
 import { IRootState } from "./store";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 
 const App = () => {
   const isLoggedIn = useSelector(
-    (state: IRootState) => !state.auth.authData.accessToken
+    (state: IRootState) => state.auth.authData.accessToken
   );
   console.log(isLoggedIn);
-  console.log(
-    useSelector((state: IRootState) => console.log(state.auth)) + "__"
-  );
+
+  // useSelector((state: IRootState) =>
+  //   console.log(state.auth.authData.accessToken + "__")
+  // );
   // return <div>{isLoggedIn ? <LoginPage /> : <>Легенда</>}</div>;
   return (
     <BrowserRouter>
@@ -44,15 +46,27 @@ const App = () => {
         ></Route>
         <Route
           path="*"
-          element={<LandingPage />}
+          element={
+            <PrivateRoute>
+              <LandingPage />
+            </PrivateRoute>
+          }
         ></Route>
         <Route
           path="profile"
-          element={<ProfilePage />}
+          element={
+            <PrivateRoute>
+              <ProfilePage />
+            </PrivateRoute>
+          }
         ></Route>
         <Route
           path="posts"
-          element={<ViewPostsPage />}
+          element={
+            <PrivateRoute>
+              <ViewPostsPage />
+            </PrivateRoute>
+          }
         ></Route>
       </Routes>
     </BrowserRouter>

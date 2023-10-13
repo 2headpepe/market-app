@@ -21,3 +21,9 @@ h1 {
   font-family: Oswald, sans-serif;
   font-size: 26px;
 }
+
+a,
+a:link,
+a:visited {
+  text-decoration: none;
+}

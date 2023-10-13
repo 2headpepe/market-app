@@ -1,17 +1,22 @@
 import React from "react";
 
 import { Button, Form, Input } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import styles from "./LoginPage.module.css";
 import { loginUser } from "../../store/auth/actionCreators";
 import { useAppDispatch } from "../../store";
 import { Dispatch } from "@reduxjs/toolkit";
+import { useSelector } from "react-redux";
 
 const LoginPage: React.FC = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  // useSelector(console.log );
+
   function loginHandle(values: { login: string; password: string }) {
     dispatch(loginUser(values));
+    navigate("/");
   }
   return (
     <div className={styles.LoginPage}>

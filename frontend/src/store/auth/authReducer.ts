@@ -37,15 +37,15 @@ export const authReducer = createSlice({
         isLoading: true,
       },
     }),
-    loginSuccess: (state, action: PayloadAction<string>): AuthState => ({
-      ...state,
-      authData: {
-        ...state.authData,
-        accessToken: action.payload,
-        isLoading: false,
-        error: null,
-      },
-    }),
+      loginSuccess: (state, action: PayloadAction<string>): AuthState => ({
+        ...state,
+        authData: {
+          ...state.authData,
+          accessToken: action.payload,
+          isLoading: false,
+          error: null,
+        },
+      }),
     loginFailure: (state, action: PayloadAction<string>): AuthState => ({
       ...state,
       authData: {

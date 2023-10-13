@@ -21,7 +21,6 @@ const Modal = ({ modal, setModal, children, position }: ModalProps) => {
       setModal(false);
     }
   }
-  console.log(position);
   return (
     <div>
       {modal && (
