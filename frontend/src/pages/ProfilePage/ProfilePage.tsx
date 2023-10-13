@@ -2,12 +2,22 @@ import React from "react";
 import styles from "./ProfilePage.module.css";
 import data from "../../data.js";
 import PostList from "../../components/PostList/PostList";
-import { MoreOutlined } from "@ant-design/icons";
+import { DownOutlined, MoreOutlined } from "@ant-design/icons";
 import Star from "../../components/Star/Star";
 import Card from "../../components/Card/Card";
 import { Button } from "antd";
 import Header from "../../components/Header/Header";
+import Modal from "../../components/Modals/Modal/Modal";
+
+interface IModal {
+  posts: boolean;
+  buys: boolean;
+}
 const ProfilePage = () => {
+  const [modal, setModal] = React.useState<IModal>({
+    posts: false,
+    buys: false,
+  });
   return (
     <div className={styles.profilePageWrapper}>
       <Header></Header>
@@ -43,24 +53,49 @@ const ProfilePage = () => {
           </div>
         </div>
         <div>
-          <div className={styles.postsWrapper}>
-            <div className={styles.postTextWrapper}>
-              <h1>Your last post</h1>
-              <div className={styles.openPosts}>Check all</div>
-            </div>
+          <div
+            className={styles.postsWrapper}
+            onClick={() => setModal((state) => ({ ...state, posts: true }))}
+          >
+            <h1>Your last post</h1>
             <hr className={styles.hr} />
             <Card {...data[0]}></Card>
+            <div className={styles.openPosts}>Show more</div>
+            <DownOutlined style={{ color: "#828282", marginTop: "5px" }} />
           </div>
-          <div className={styles.postsWrapper}>
+          <div
+            className={styles.postsWrapper}
+            onClick={() => setModal((state) => ({ ...state, buys: true }))}
+          >
             <div className={styles.postTextWrapper}>
               <h1>Your last buy</h1>
-              <div className={styles.openPosts}>Check all</div>
             </div>
             <hr className={styles.hr} />
             <Card {...data[0]}></Card>
+            <div className={styles.openPosts}>Show more</div>
+            <DownOutlined style={{ color: "#828282", marginTop: "5px" }} />
           </div>
         </div>
       </div>
+
+      <Modal
+        modal={modal.posts}
+        setModal={() =>
+          setModal((state: IModal) => ({ ...state, posts: false }))
+        }
+      >
+        <h1>Posts</h1>
+        <PostList posts={data}></PostList>
+      </Modal>
+      <Modal
+        modal={modal.buys}
+        setModal={() =>
+          setModal((state: IModal) => ({ ...state, buys: false }))
+        }
+      >
+        <h1>Buys</h1>
+        <PostList posts={data}></PostList>
+      </Modal>
     </div>
   );
 };

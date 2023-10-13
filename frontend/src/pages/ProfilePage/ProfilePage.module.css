@@ -13,14 +13,16 @@
 .profileWrapper,
 .postsWrapper {
   margin: 20px;
-  padding: 20px;
+  padding: 20px 20px 10px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   background-color: white;
 
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
+}
+.postsWrapper {
+  align-items: center;
 }
 .profileWrapper {
   width: 25%;
@@ -71,7 +73,7 @@
 .openPosts {
   font-size: 12px;
   color: #828282;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .postTextWrapper {
@@ -82,7 +84,7 @@
 
 .hr {
   border-color: rgba(150, 150, 150, 0.2);
-  margin: 20px 0px;
+  margin: 20px;
   width: 100%;
 }
 
