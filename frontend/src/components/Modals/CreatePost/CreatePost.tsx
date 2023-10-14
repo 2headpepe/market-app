@@ -8,7 +8,6 @@ const CreatePost = () => {
       <div className={styles.inputImg}>Input img</div>
       <div className={styles.infoWrapper}>
         <h1>Create post</h1>
-
         <Form>
           <Form.Item
             label="Title"

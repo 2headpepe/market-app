@@ -1,4 +1,6 @@
+import { CloseOutlined } from "@ant-design/icons";
 import "./Modal.css";
+import { colors } from "react-select/dist/declarations/src/theme";
 interface ModalProps {
   modal: boolean;
   setModal: Function;

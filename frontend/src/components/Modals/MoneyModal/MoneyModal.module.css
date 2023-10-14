@@ -1,11 +1,10 @@
 .Modal {
-  /* width: 100vw; */
   min-height: 100vh;
+
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  /* bottom: 0; */
-  position: absolute;
 
   background-color: rgba(49, 49, 49, 0.8);
 }

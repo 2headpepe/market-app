@@ -1,21 +1,17 @@
 .createPostWrapper {
   display: flex;
   max-height: 500px;
-  /* justify-content: space-around; */
 }
 
 .inputImg {
   width: 200px;
-  /* max-height: 80%; */
+
   margin: 20px 0px;
+
   background-color: grey;
   text-align: center;
-  /* line-height: ; */
 }
 
 .infoWrapper {
   margin-left: 40px;
-  /* display: flex; */
-  /* justify-content: center; */
-  /* align-items: center; */
 }

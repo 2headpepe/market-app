@@ -20,28 +20,6 @@ const MoneyModal = (props: MoneyModalProps) => {
     </Select>
   );
 
-  // function onClick(event: React.MouseEvent) {
-  //   if (
-  //     event.target instanceof HTMLElement &&
-  //     event.target.className === "Modal"
-  //   ) {
-  //     setModal(false);
-  //   }
-  // }
-  // return (
-  //   <div className={styles.Modal}>
-  //     <div className={styles.modalContent}>
-  //       <InputNumber
-  //         className={styles.input}
-  //         addonBefore={selectOperation}
-  //         defaultValue={100}
-  //       />
-  //       <div className={styles.buttonWrapper}>
-  //         <Button type="primary">Apply</Button>
-  //       </div>
-  //     </div>
-  //   </div>
-  // );
   return (
     <div>
       <Modal
