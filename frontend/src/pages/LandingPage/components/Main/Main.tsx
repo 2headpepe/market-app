@@ -1,5 +1,5 @@
 import React from "react";
-import Card from "../../../../components/Card/Card";
+import Card from "../../../../components/Cards/Cards";
 import data from "../../../../data";
 import Select from "react-select";
 import styles from "./Main.module.css";

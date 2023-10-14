@@ -1,5 +1,5 @@
 import React from "react";
-import Card from "../Card/Card";
+import Card from "../Cards/Cards";
 import styles from "./PostList.module.css";
 
 interface PostListProps {

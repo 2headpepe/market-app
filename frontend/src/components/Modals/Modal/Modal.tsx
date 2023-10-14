@@ -34,9 +34,7 @@ const Modal = ({ modal, setModal, children, position }: ModalProps) => {
             className="Modal--content"
             style={{ ...position }}
           >
-            {/* <h1 style={{ marginTop: "20px" }}>Your posts</h1> */}
             {children}
-            {/* <PostList posts={data}></PostList> */}
           </div>
         </div>
       )}

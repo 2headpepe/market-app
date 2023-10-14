@@ -1,19 +1,16 @@
 .profilePageWrapper {
-  /* display: flex; */
-
   background-color: rgb(248, 250, 250);
 }
+
 .profileWrapper {
   height: 100%;
   position: relative;
 }
-.infoWrapper {
-  width: 100%;
-}
+
 .profileWrapper,
 .postsWrapper {
-  margin: 20px;
-  padding: 20px 20px 10px;
+  margin: 20px 20px 0px;
+  padding: 20px 20px 20px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   background-color: white;
@@ -27,16 +24,6 @@
 .profileWrapper {
   width: 25%;
 }
-.profilePhoto {
-  border-radius: 100%;
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-
-  margin: auto;
-  margin-top: 20px;
-}
-
 .firstName {
   margin-top: 20px;
 
@@ -54,26 +41,10 @@
   line-height: 14px;
   margin-top: 4px;
 }
-.status {
-  text-align: center;
-  font-weight: 400;
-
-  font-size: 14px;
-  color: rgb(71, 115, 226);
-}
 .date {
   text-align: center;
   font-size: 12px;
   color: #828282;
-}
-
-.email,
-.password,
-.birthDate,
-.openPosts {
-  font-size: 12px;
-  color: #828282;
-  margin-top: 20px;
 }
 
 .postTextWrapper {
@@ -82,14 +53,6 @@
   justify-content: space-around;
 }
 
-.hr {
-  border-color: rgba(150, 150, 150, 0.2);
-  margin: 20px;
-  width: 100%;
-}
-
-.buttonWrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
+.showMore {
+  margin-top: 20px;
 }
