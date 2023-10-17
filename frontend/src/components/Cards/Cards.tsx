@@ -2,15 +2,16 @@ import "./Cards.css";
 import Card from "./Card/Card";
 interface ExtendedCardProps {
   id: number;
+  userId: number;
   title: string;
-  location: string;
-  date: string;
-  description: string;
-  imageUrl: string;
+  city: string;
+  postDate: string;
+  text: string;
+  images: string[];
   price: number;
   header?: {
     title: string;
-    showMore: boolean;
+    showMore: (e: React.MouseEvent<HTMLDivElement>) => void;
   };
 }
 
@@ -19,7 +20,7 @@ const HeaderForCard = ({
   showMore,
 }: {
   title: string;
-  showMore?: boolean;
+  showMore?: (e: React.MouseEvent<HTMLDivElement>) => void;
 }) => {
   return (
     <>
@@ -36,6 +37,7 @@ const HeaderForCard = ({
           <div
             className={`secondary`}
             style={{ textDecoration: "underline", cursor: "pointer" }}
+            onClick={showMore}
           >
             Show more
           </div>
@@ -49,10 +51,10 @@ const HeaderForCard = ({
 function ExtendedCard(props: ExtendedCardProps) {
   const { header } = props;
   return (
-    <div>
+    <span>
       {header && <HeaderForCard {...header} />}
       <Card {...props} />
-    </div>
+    </span>
   );
 }
 
