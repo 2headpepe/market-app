@@ -27,7 +27,6 @@
   align-items: center;
 
   border-radius: 48px;
-  z-index: 2;
 }
 .infoWrapper > .icon {
   background: linear-gradient(to right, #bfe9ff, #ff6e7f);

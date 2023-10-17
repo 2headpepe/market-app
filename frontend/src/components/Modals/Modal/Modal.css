@@ -19,6 +19,7 @@
   line-height: 1.4;
   padding: 14px 28px;
   border-radius: 3px;
-  background: #f1f1f1;
-  max-width: 700px;
+  background: white;
+
+  max-width: 90%;
 }

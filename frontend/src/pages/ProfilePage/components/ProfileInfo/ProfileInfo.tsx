@@ -1,6 +1,8 @@
 import { Button } from "antd";
 import Star from "../../../../components/Star/Star";
 import styles from "./ProfileInfo.module.css";
+import CreatePost from "../../../../components/Modals/CreatePost/CreatePost";
+import React from "react";
 
 const TwoLineInfo = ({
   main,
@@ -17,7 +19,9 @@ const TwoLineInfo = ({
   );
 };
 
-const ProfileInfo = () => {
+type ProfileInfoProps = React.MouseEventHandler;
+
+const ProfileInfo = ({ createPost }: { createPost: ProfileInfoProps }) => {
   const info = [
     { main: "Status", secondary: "User" },
     { main: "Email", secondary: "myemail@gmail.com" },
@@ -48,7 +52,12 @@ const ProfileInfo = () => {
       <hr className={styles.hr} />
 
       <div className={styles.buttonWrapper}>
-        <Button type="primary">Add post</Button>
+        <Button
+          type="primary"
+          onClick={createPost}
+        >
+          Add post
+        </Button>
         <Button>Edit profile</Button>
       </div>
     </>

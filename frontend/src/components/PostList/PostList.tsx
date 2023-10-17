@@ -5,11 +5,12 @@ import styles from "./PostList.module.css";
 interface PostListProps {
   posts: {
     id: number;
+    userId: number;
     title: string;
-    location: string;
-    date: string;
-    description: string;
-    imageUrl: string;
+    city: string;
+    postDate: string;
+    text: string;
+    images: string[];
     price: number;
   }[];
 }

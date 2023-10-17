@@ -2,14 +2,12 @@ import React from "react";
 import styles from "./ProfilePage.module.css";
 import data from "../../data.js";
 import PostList from "../../components/PostList/PostList";
-import { DownOutlined, MoreOutlined } from "@ant-design/icons";
-import Star from "../../components/Star/Star";
 import Card from "../../components/Cards";
-import { Button } from "antd";
 import Header from "../../components/Header/Header";
 import Modal from "../../components/Modals/Modal/Modal";
-import { time } from "console";
 import ProfileInfo from "./components/ProfileInfo/ProfileInfo";
+import PhotoModal from "../../components/Modals/PhotoModal/PhotoModal";
+import CreatePost from "../../components/Modals/CreatePost/CreatePost";
 
 interface IModal {
   posts: boolean;
@@ -20,6 +18,8 @@ const ProfilePage = () => {
     posts: false,
     buys: false,
   });
+
+  const [createPostModal, setCreatePostModal] = React.useState(false);
 
   function onPostsClick() {
     setModal((state) => ({ ...state, posts: !state.posts }));
@@ -33,27 +33,27 @@ const ProfilePage = () => {
       <Header></Header>
       <div style={{ display: "flex", marginTop: "20px" }}>
         <div className={styles.profileWrapper}>
-          <ProfileInfo />
+          <ProfileInfo
+            createPost={function (
+              event: React.MouseEvent<Element, MouseEvent>
+            ): void {
+              setCreatePostModal((createPostModal) => !createPostModal);
+            }}
+          />
         </div>
 
         <div>
-          <div
-            className={styles.postsWrapper}
-            onClick={onPostsClick}
-          >
+          <div className={styles.postsWrapper}>
             <Card
               {...data[0]}
-              header={{ title: "Your last post", showMore: true }}
+              header={{ title: "Your last post", showMore: onPostsClick }}
             ></Card>
           </div>
 
-          <div
-            className={styles.postsWrapper}
-            onClick={onBuysClick}
-          >
+          <div className={styles.postsWrapper}>
             <Card
               {...data[0]}
-              header={{ title: "Your last buy", showMore: true }}
+              header={{ title: "Your last buy", showMore: onBuysClick }}
             ></Card>
           </div>
         </div>
@@ -75,6 +75,12 @@ const ProfilePage = () => {
         <hr />
         <PostList posts={data}></PostList>
       </Modal>
+
+      <CreatePost
+        modal={createPostModal}
+        setModal={setCreatePostModal}
+        createPost={console.log}
+      ></CreatePost>
     </div>
   );
 };

@@ -28,7 +28,6 @@ const Main = () => {
   for (let i = 1; i <= pageNumber; ++i) {
     pages.push(i);
   }
-  console.log(posts);
   return (
     <div className={styles.mainWrapper}>
       <div className={styles.sortWrapper}>

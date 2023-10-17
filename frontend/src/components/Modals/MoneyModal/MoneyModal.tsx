@@ -1,15 +1,11 @@
 import { Button, Input, InputNumber, Select } from "antd";
 import styles from "./MoneyModal.module.css";
 import Modal from "../Modal/Modal";
+import ModalProps from "../ModalTypes";
 
 const { Option } = Select;
 
-interface MoneyModalProps {
-  modal: boolean;
-  setModal: Function;
-}
-
-const MoneyModal = (props: MoneyModalProps) => {
+const MoneyModal = (props: ModalProps) => {
   const selectOperation = (
     <Select
       defaultValue="add"
