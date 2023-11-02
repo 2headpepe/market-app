@@ -9,13 +9,14 @@ export const loginUser =
   async (dispatch: Dispatch<any>): Promise<void> => {
     try {
       dispatch(loginStart());
-
-      //   const response = await api.auth.login(data);
-      const response = { data: { accessToken: "hiii" } };
-
+      console.log(data)
+      const response = await api.auth.login(data);
+      // const response = { data: { accessToken: "hiii" } };
       dispatch(loginSuccess(response.data.accessToken));
       //   dispatch(getProfile());
     } catch (e: any) {
+      console.log('sfdsfsd');
+
       console.error(e);
 
       dispatch(loginFailure(e.message));

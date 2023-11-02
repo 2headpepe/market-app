@@ -14,7 +14,8 @@ const LoginPage: React.FC = () => {
   const navigate = useNavigate();
   // useSelector(console.log );
 
-  function loginHandle(values: { login: string; password: string }) {
+  function loginHandle(values: { email: string; password: string }) {
+    console.log(values);
     dispatch(loginUser(values));
     navigate("/");
   }
