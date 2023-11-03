@@ -61,21 +61,6 @@ const CategoryBadge = ({ width, height, children, id }: CategoryBadgeProps) => {
       >
         {children}
       </div>
-      {/* <div style={{ backgroundColor: "rgb(73, 198, 85)" }}>hiiii</div>
-      {colors.map((e) => {
-        return (
-          <div
-            className={styles.colorful}
-            style={{
-              background: `linear-gradient(45deg, ${e[0]}, ${e[1]},${e[2]},${e[3]})`,
-              height,
-              width,
-            }}
-          >
-            {children}
-          </div>
-        );
-      })} */}
     </div>
   );
 };

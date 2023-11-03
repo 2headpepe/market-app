@@ -25,7 +25,6 @@ const ProfileInfo = ({ createPost }: { createPost: ProfileInfoProps }) => {
   const info = [
     { main: "Status", secondary: "User" },
     { main: "Email", secondary: "myemail@gmail.com" },
-    { main: "Birthdate", secondary: "21.12.2003" },
     { main: "Password", secondary: "password" },
   ].map((e) => <TwoLineInfo {...e} />);
 

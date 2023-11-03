@@ -4,7 +4,19 @@ import Search, { SearchProps } from "antd/es/input/Search";
 import { Link } from "react-router-dom";
 import MoneyModal from "../Modals/MoneyModal/MoneyModal";
 
-const Header = () => {
+interface HeaderProps {
+  showTitle?: boolean;
+  showSearch?: boolean;
+  showMoney?: boolean;
+  showInfo?: boolean;
+}
+
+const Header = ({
+  showTitle = true,
+  showSearch = true,
+  showMoney = true,
+  showInfo = true,
+}: HeaderProps) => {
   const onSearch: SearchProps["onSearch"] = (value, _e, info) =>
     console.log(info?.source, value);
 
@@ -17,27 +29,33 @@ const Header = () => {
   return (
     <nav className={styles.NavBar}>
       <Link
-        to="/"
+        to="../main"
         className={styles.left}
+        style={{ opacity: showTitle ? 1 : 0 }}
       >
-        <h1>Fake avito</h1>
+        <h1>MegaMarket</h1>
       </Link>
 
       <Search
         className={styles.search}
         onSearch={onSearch}
         placeholder="Search"
+        style={{ opacity: showSearch ? 1 : 0 }}
       ></Search>
 
       <div className={styles.infoWrapper}>
         <div
           className={styles.icon}
           onClick={handleModal}
+          style={{ opacity: showMoney ? 1 : 0 }}
         >
           <div className="primary2">0.00$</div>
         </div>
 
-        <Link to="/profile">
+        <Link
+          to="../profile"
+          style={{ opacity: showInfo ? 1 : 0 }}
+        >
           <div className={styles.info}>
             <div>
               <div className="primary">Your name</div>

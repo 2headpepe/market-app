@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 // import {SearchOutlined} from "antd";
 import styles from "./LandingPage.module.css";
 import Header from "../../components/Header/Header";
@@ -7,7 +6,12 @@ import Main from "./components/Main/Main";
 const LandingPage: React.FC = () => {
   return (
     <div className={styles.LandingPage}>
-      <Header></Header>
+      <Header
+        showTitle
+        showSearch
+        showMoney
+        showInfo
+      ></Header>
       <Main></Main>
     </div>
   );
