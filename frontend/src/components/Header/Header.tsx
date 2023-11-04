@@ -3,6 +3,10 @@ import styles from "./Header.module.css";
 import Search, { SearchProps } from "antd/es/input/Search";
 import { Link } from "react-router-dom";
 import MoneyModal from "../Modals/MoneyModal/MoneyModal";
+import { Button } from "antd";
+import { useDispatch } from "react-redux";
+import { logoutUser } from "../../store/auth/actionCreators";
+import { useAppDispatch } from "../../store";
 
 interface HeaderProps {
   showTitle?: boolean;
@@ -17,6 +21,7 @@ const Header = ({
   showMoney = true,
   showInfo = true,
 }: HeaderProps) => {
+  const dispatch = useAppDispatch();
   const onSearch: SearchProps["onSearch"] = (value, _e, info) =>
     console.log(info?.source, value);
 
@@ -25,7 +30,10 @@ const Header = ({
   function handleModal() {
     setMoneyModal((modal) => !modal);
   }
-
+  function logoutHandle() {
+    dispatch(logoutUser());
+    
+  }
   return (
     <nav className={styles.NavBar}>
       <Link
@@ -69,6 +77,7 @@ const Header = ({
             />
           </div>
         </Link>
+        <Button onClick={logoutHandle}>LogOut</Button>
       </div>
 
       <MoneyModal

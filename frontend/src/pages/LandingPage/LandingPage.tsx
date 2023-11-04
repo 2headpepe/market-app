@@ -6,12 +6,7 @@ import Main from "./components/Main/Main";
 const LandingPage: React.FC = () => {
   return (
     <div className={styles.LandingPage}>
-      <Header
-        showTitle
-        showSearch
-        showMoney
-        showInfo
-      ></Header>
+      <Header></Header>
       <Main></Main>
     </div>
   );

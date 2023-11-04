@@ -35,28 +35,26 @@ const App = () => (
         path="/login"
         element={<LoginPage />}
       ></Route>
-      <Route path=":userId">
-        <Route
-          path="main"
-          element={
-            <PrivateRoute>
-              <LandingPage />
-            </PrivateRoute>
-          }
-        ></Route>
-        <Route
-          path="profile"
-          element={
-            <PrivateRoute>
-              <ProfilePage />
-            </PrivateRoute>
-          }
-        ></Route>
-        <Route
-          path=":postId"
-          element={<PostInfoPage />}
-        ></Route>
-      </Route>
+      <Route
+        path="main"
+        element={
+          <PrivateRoute>
+            <LandingPage />
+          </PrivateRoute>
+        }
+      ></Route>
+      <Route
+        path="profile"
+        element={
+          <PrivateRoute>
+            <ProfilePage />
+          </PrivateRoute>
+        }
+      ></Route>
+      <Route
+        path=":postId"
+        element={<PostInfoPage />}
+      ></Route>
 
       <Route
         path="admin"
