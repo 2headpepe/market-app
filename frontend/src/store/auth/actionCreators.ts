@@ -1,6 +1,11 @@
 import { Dispatch } from "@reduxjs/toolkit";
 import { ILoginRequest } from "../../api/auth/types";
-import { loginFailure, loginStart, loginSuccess } from "./authReducer";
+import {
+  loginFailure,
+  loginStart,
+  loginSuccess,
+  logoutSuccess,
+} from "./authReducer";
 
 import api from "../../api";
 
@@ -21,4 +26,9 @@ export const loginUser =
 
       dispatch(loginFailure(e.message));
     }
+  };
+export const logoutUser =
+  () =>
+  async (dispatch: Dispatch): Promise<void> => {
+    dispatch(logoutSuccess());
   };

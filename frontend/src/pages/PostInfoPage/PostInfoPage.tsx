@@ -3,67 +3,77 @@ import React from "react";
 import ShowPhoto from "../../components/ShowPhoto/ShowPhoto";
 import Card from "../../components/Cards";
 import styles from "./PostInfoPage.module.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import CategoryBadge from "../../components/CategoryBadge/CategoryBadge";
 import Header from "../../components/Header/Header";
-interface IPostRequest {
-  images: string[];
-  id: number;
-  userId: number;
-  title: string;
-  text: string;
-  categoryId: string;
-  price: number;
-  city: string;
-  postDate: string;
-  sold: boolean;
-}
-const category = [
-  "Home",
-  "Services",
-  "Electronics",
-  "Clothes",
-  "Health and beauty",
-];
+// interface IPostRequest {
+//   images: string[];
+//   id: number;
+//   userId: number;
+//   title: string;
+//   text: string;
+//   categoryId: string;
+//   price: number;
+//   city: string;
+//   postDate: string;
+//   sold: boolean;
+// }
+// const category = [
+//   "Home",
+//   "Services",
+//   "Electronics",
+//   "Clothes",
+//   "Health and beauty",
+// ];
 
-const PostInfoPage = (props: IPostRequest) => {
-  const { images, city, title, postDate, text, price } = props;
+const PostInfoPage = () => {
+  const location = useLocation();
+  const { images, city, title, postDate, text, price } = location.state;
+
   return (
     <div className={styles.postInfoPageWrapper}>
-      <Header></Header>
+      <Header
+        showTitle
+        showSearch
+        showMoney
+        showInfo
+      ></Header>
 
       <div className={styles.mainWrapper}>
         <div>
           <ShowPhoto
-            height={"500px"}
-            width={"500px"}
-            images={[
-              "https://content.api.news/v3/images/bin/19baaccb3d706775bb9c3bbe2f946bb3",
-              "https://damion.club/uploads/posts/2022-09/1663879174_3-damion-club-p-dora-pevitsa-oboi-instagram-3.jpg",
-            ]}
+            height={"70vh"}
+            width={"70vh"}
+            images={images}
           ></ShowPhoto>
         </div>
 
         <div className={styles.infoWrapper}>
-          {/* <Link to={"/"}>
-          <div className="secondary">Get back</div>
-        </Link> */}
-
-          <CategoryBadge
-            //   width={"200px"}
-            height={"40px"}
-            id={"Electronics"}
-          >
-            Clothes
-          </CategoryBadge>
-          {/* {category.map((e) => (
+          <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
             <CategoryBadge
-              id={e}
-              height={"40px"}
+              width={"200px"}
+              height={"30px"}
+              id={"Electronics"}
             >
-              (.)(.)  
+              Clothes
             </CategoryBadge>
-          ))} */}
+            <Link to="/1/profile">
+              <div className={styles.sellerInfo}>
+                <div>
+                  <div style={{ color: "white" }}>Seller</div>
+                </div>
+              </div>
+            </Link>
+            <Link to="/1/profile">
+              <img
+                className={styles.photo}
+                src="https://38s.musify.club/img/68/22744618/58256306.jpg"
+                alt="icon"
+                height={30}
+              />
+            </Link>
+          </div>
+
           {/* <hr /> */}
           <div
             className="Card--info-wrapper "
@@ -72,6 +82,7 @@ const PostInfoPage = (props: IPostRequest) => {
               display: "flex",
               flexDirection: "column",
               gap: "8px",
+              maxWidth: "30vh",
             }}
           >
             <div className="Card--location--wrapper">
@@ -80,30 +91,29 @@ const PostInfoPage = (props: IPostRequest) => {
                 alt=""
                 className="Card--location--icon"
               />
-              <p className="Card--location--text">{city}</p>
-              <p className="Card--dates">{postDate}</p>
+              <p style={{ fontSize: "16px" }}>{city}</p>
+              <p style={{ fontSize: "12px" }}>{postDate}</p>
             </div>
 
-            <h3 className="Card--name">{title}</h3>
-            <p className="Card--text">{text}</p>
+            <h3
+              className="Card--name"
+              style={{ fontSize: "32px" }}
+            >
+              {title}
+            </h3>
+            <p style={{ fontSize: "14px" }}>{text}</p>
             <h4 className="Card--price">{price + "$"}</h4>
           </div>
 
           {/* <hr /> */}
-          <Link to="/profile">
-            <div className={styles.sellerInfo}>
-              <div>
-                <div className="primary">Your name</div>
-                <div className="secondary">Status</div>
-              </div>
-              <img
-                className={styles.photo}
-                src="https://38s.musify.club/img/68/22744618/58256306.jpg"
-                alt="icon"
-                height={48}
-              />
-            </div>
-          </Link>
+
+          <Button
+            type="primary"
+            style={{ marginTop: "20px" }}
+          >
+            {" "}
+            Buy
+          </Button>
         </div>
       </div>
     </div>

@@ -28,7 +28,9 @@ const ShowPhoto = ({ height, width, images }: ShowPhotoProps) => {
 
   return (
     <div className={styles.pageWrapper}>
-      <LeftOutlined onClick={decrement}></LeftOutlined>
+      <div className={styles.button}>
+        <LeftOutlined onClick={decrement}></LeftOutlined>
+      </div>
       <div
         className={styles.showPhotoWrapper}
         style={{ height: height, width: width }}
@@ -40,22 +42,10 @@ const ShowPhoto = ({ height, width, images }: ShowPhotoProps) => {
             className={styles.img}
           />
         </div>
-        {/* <Button
-          className={`${styles.button} ${styles.left}`}
-          onClick={decrement}
-        >
-          <LeftOutlined className={styles.icon} />
-        </Button>
-        <Button
-          className={`${styles.button} ${styles.right}`}
-          onClick={increment}
-        >
-          <RightOutlined className={styles.icon} />
-        </Button> */}
       </div>
-      <div style={{ height: "100%" }}>
+      <div className={styles.button}>
         <RightOutlined onClick={increment} />
-      </div>
+      </div>{" "}
     </div>
   );
 };

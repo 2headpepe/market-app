@@ -8,6 +8,8 @@ import Modal from "../../components/Modals/Modal/Modal";
 import ProfileInfo from "./components/ProfileInfo/ProfileInfo";
 import PhotoModal from "../../components/Modals/PhotoModal/PhotoModal";
 import CreatePost from "../../components/Modals/CreatePost/CreatePost";
+import PostsModal from "../../components/Modals/PostsModal/PostsModal";
+import ExtendedCard from "../../components/Cards";
 
 interface IModal {
   posts: boolean;
@@ -30,7 +32,12 @@ const ProfilePage = () => {
   return (
     //style={{}}
     <div className={styles.profilePageWrapper}>
-      <Header></Header>
+      <Header
+        showTitle
+        showSearch
+        showMoney
+        showInfo
+      ></Header>
       <div style={{ display: "flex", marginTop: "20px" }}>
         <div className={styles.profileWrapper}>
           <ProfileInfo
@@ -44,37 +51,80 @@ const ProfilePage = () => {
 
         <div>
           <div className={styles.postsWrapper}>
-            <Card
-              {...data[0]}
-              header={{ title: "Your last post", showMore: onPostsClick }}
-            ></Card>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-around",
+                alignItems: "center",
+                width: "100%",
+              }}
+            >
+              <h2>Your products</h2>
+              <div
+                className={`secondary`}
+                style={{ textDecoration: "underline", cursor: "pointer" }}
+                onClick={onPostsClick}
+              >
+                Show more
+              </div>
+            </div>
+            <hr />
+            <Card {...data[0]}></Card>
           </div>
 
           <div className={styles.postsWrapper}>
-            <Card
-              {...data[0]}
-              header={{ title: "Your last buy", showMore: onBuysClick }}
-            ></Card>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-around",
+                alignItems: "center",
+                width: "100%",
+              }}
+            >
+              <h2>Your buys</h2>
+              <div
+                className={`secondary`}
+                style={{ textDecoration: "underline", cursor: "pointer" }}
+                onClick={onBuysClick}
+              >
+                Show more
+              </div>
+            </div>
+            <hr />
+            <Card {...data[0]}></Card>
           </div>
         </div>
       </div>
 
-      <Modal
+      <PostsModal
+        posts={data}
+        modal={modal.posts}
+        setModal={onPostsClick}
+        header="Your products"
+      ></PostsModal>
+      <PostsModal
+        posts={data}
+        modal={modal.buys}
+        setModal={onBuysClick}
+        header="Your buys"
+      ></PostsModal>
+
+      {/* <Modal
         modal={modal.posts}
         setModal={onPostsClick}
       >
         <h1>Posts</h1>
         <hr />
-        <PostList posts={data}></PostList>
-      </Modal>
-      <Modal
+        <PostList {...data}></PostList>
+      </Modal> */}
+      {/* <Modal
         modal={modal.buys}
         setModal={onBuysClick}
       >
         <h1>Buys</h1>
         <hr />
-        <PostList posts={data}></PostList>
-      </Modal>
+        <PostList {...data}></PostList>
+      </Modal> */}
 
       <CreatePost
         modal={createPostModal}

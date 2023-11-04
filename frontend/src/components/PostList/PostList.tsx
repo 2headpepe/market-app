@@ -1,8 +1,8 @@
 import React from "react";
-import Card from "../Cards/Cards";
+import Card from "../Cards";
 import styles from "./PostList.module.css";
 
-interface PostListProps {
+export interface PostListProps {
   posts: {
     id: number;
     userId: number;
@@ -16,6 +16,7 @@ interface PostListProps {
 }
 
 const PostList = ({ posts }: PostListProps) => {
+  console.log(posts);
   return (
     <div className={styles.listWrapper}>
       {posts.length > 0 ? (

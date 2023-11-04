@@ -6,7 +6,6 @@ import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import LandingPage from "./pages/LandingPage/LandingPage";
 import reportWebVitals from "./reportWebVitals";
-import ViewPostsPage from "./pages/ViewPostsPage/ViewPostsPage";
 
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 
@@ -19,6 +18,7 @@ import UploadPhoto from "./components/UploadPhoto/UploadPhoto";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import PostInfoPage from "./pages/PostInfoPage/PostInfoPage";
 import CategoryBadge from "./components/CategoryBadge/CategoryBadge";
+import AdminPage from "./pages/AdminPage/AdminPage";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -28,15 +28,15 @@ const App = () => (
   <BrowserRouter>
     <Routes>
       <Route
-        path="register"
+        path="/register"
         element={<RegisterPage />}
       ></Route>
       <Route
-        path="login"
+        path="/login"
         element={<LoginPage />}
       ></Route>
       <Route
-        path="*"
+        path="main"
         element={
           <PrivateRoute>
             <LandingPage />
@@ -52,34 +52,13 @@ const App = () => (
         }
       ></Route>
       <Route
-        path="posts"
-        element={
-          <PrivateRoute>
-            <ViewPostsPage />
-          </PrivateRoute>
-        }
+        path=":postId"
+        element={<PostInfoPage />}
       ></Route>
+
       <Route
-        path="postInfo"
-        element={
-          <PostInfoPage
-            images={[
-              "https://damion.club/uploads/posts/2022-09/1663879174_3-damion-club-p-dora-pevitsa-oboi-instagram-3.jpg",
-              "https://damion.club/uploads/posts/2022-09/1663879174_3-damion-club-p-dora-pevitsa-oboi-instagram-3.jpg",
-            ]}
-            id={0}
-            userId={0}
-            title={"Mount Fuji"}
-            text={
-              "Mount Fuji is the tallest mountain in Japan, standing at 3,776 meters (12,380 feet). Mount Fuji is the single most popular tourist site in Japan, for both Japanese and foreign tourists."
-            }
-            categoryId={"Products"}
-            price={1000}
-            city={"Tokio"}
-            postDate={Date()}
-            sold={false}
-          />
-        }
+        path="admin"
+        element={<AdminPage />}
       ></Route>
     </Routes>
   </BrowserRouter>

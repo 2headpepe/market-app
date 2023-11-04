@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 // import {SearchOutlined} from "antd";
 import styles from "./LandingPage.module.css";
 import Header from "../../components/Header/Header";
