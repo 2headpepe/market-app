@@ -4,26 +4,32 @@ import React from "react";
 import styles from "./ShowPhoto.module.css";
 
 interface ShowPhotoProps {
-  images: string[];
+  images: string[] | null;
   height?: string;
   width?: string;
 }
 
 const ShowPhoto = ({ height, width, images }: ShowPhotoProps) => {
+
+
   const [currentImage, setCurrentImage] = React.useState(0);
 
+  if(!images){
+    return <h1>No photos</h1>;
+  }
+  
   function decrement() {
     setCurrentImage((state) => {
       if (state) {
         return state - 1;
       } else {
-        return images.length - 1;
+        return images!.length - 1;
       }
     });
   }
 
   function increment() {
-    setCurrentImage((state) => (state + 1) % images.length);
+    setCurrentImage((state) => (state + 1) % images!.length);
   }
 
   return (

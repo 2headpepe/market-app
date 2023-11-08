@@ -3,77 +3,81 @@ import React from "react";
 import ShowPhoto from "../../components/ShowPhoto/ShowPhoto";
 import Card from "../../components/Cards";
 import styles from "./PostInfoPage.module.css";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import CategoryBadge from "../../components/CategoryBadge/CategoryBadge";
 import Header from "../../components/Header/Header";
-// interface IPostRequest {
-//   images: string[];
-//   id: number;
-//   userId: number;
-//   title: string;
-//   text: string;
-//   categoryId: string;
-//   price: number;
-//   city: string;
-//   postDate: string;
-//   sold: boolean;
-// }
-// const category = [
-//   "Home",
-//   "Services",
-//   "Electronics",
-//   "Clothes",
-//   "Health and beauty",
-// ];
+interface IPostRequest {
+  images: string[];
+  id: number;
+  userId: number;
+  title: string;
+  text: string;
+  categoryId: string;
+  price: number;
+  city: string;
+  postDate: string;
+  sold: boolean;
+}
+const category = [
+  "Home",
+  "Services",
+  "Electronics",
+  "Clothes",
+  "Health and beauty",
+];
 
 const PostInfoPage = () => {
-  const location = useLocation();
-  const { images, city, title, postDate, text, price } = location.state;
+  const id = useParams().id;
+  //getListing()
+  const post = {
+    "id": 0,
+    "title": "string",
+    "text": "string",
+    "categoryId": "string",
+    "price": 0,
+    "city": "string",
+    "postDate": "2023-11-05T17:02:41.681Z",
+    "sold": true,
+    "userId": 0
+  }
 
+  // const { images, city, title, postDate, text, price } = props;
   return (
     <div className={styles.postInfoPageWrapper}>
-      <Header
-        showTitle
-        showSearch
-        showMoney
-        showInfo
-      ></Header>
+      <Header></Header>
 
       <div className={styles.mainWrapper}>
         <div>
           <ShowPhoto
-            height={"70vh"}
-            width={"70vh"}
-            images={images}
+            height={"500px"}
+            width={"500px"}
+            images={[
+              "https://content.api.news/v3/images/bin/19baaccb3d706775bb9c3bbe2f946bb3",
+              "https://damion.club/uploads/posts/2022-09/1663879174_3-damion-club-p-dora-pevitsa-oboi-instagram-3.jpg",
+            ]}
           ></ShowPhoto>
         </div>
 
         <div className={styles.infoWrapper}>
-          <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
-            <CategoryBadge
-              width={"200px"}
-              height={"30px"}
-              id={"Electronics"}
-            >
-              Clothes
-            </CategoryBadge>
-            <Link to="/1/profile">
-              <div className={styles.sellerInfo}>
-                <div>
-                  <div style={{ color: "white" }}>Seller</div>
-                </div>
-              </div>
-            </Link>
-            <Link to="/1/profile">
-              <img
-                className={styles.photo}
-                src="https://38s.musify.club/img/68/22744618/58256306.jpg"
-                alt="icon"
-                height={30}
-              />
-            </Link>
-          </div>
+          {/* <Link to={"/"}>
+          <div className="secondary">Get back</div>
+        </Link> */}
 
+          <CategoryBadge
+            //   width={"200px"}
+            height={"40px"}
+            id={"Electronics"}
+          >
+            Clothes
+          </CategoryBadge>
+          {/* {category.map((e) => (
+            <CategoryBadge
+              id={e}
+              height={"40px"}
+            >
+              (.)(.)  
+            </CategoryBadge>
+          ))} */}
           {/* <hr /> */}
           <div
             className="Card--info-wrapper "
@@ -82,7 +86,6 @@ const PostInfoPage = () => {
               display: "flex",
               flexDirection: "column",
               gap: "8px",
-              maxWidth: "30vh",
             }}
           >
             <div className="Card--location--wrapper">
@@ -91,29 +94,30 @@ const PostInfoPage = () => {
                 alt=""
                 className="Card--location--icon"
               />
-              <p style={{ fontSize: "16px" }}>{city}</p>
-              <p style={{ fontSize: "12px" }}>{postDate}</p>
+              <p className="Card--location--text">{post.city}</p>
+              <p className="Card--dates">{post.postDate}</p>
             </div>
 
-            <h3
-              className="Card--name"
-              style={{ fontSize: "32px" }}
-            >
-              {title}
-            </h3>
-            <p style={{ fontSize: "14px" }}>{text}</p>
-            <h4 className="Card--price">{price + "$"}</h4>
+            <h3 className="Card--name">{post.title}</h3>
+            <p className="Card--text">{post.text}</p>
+            <h4 className="Card--price">{post.price + "$"}</h4>
           </div>
 
           {/* <hr /> */}
-
-          <Button
-            type="primary"
-            style={{ marginTop: "20px" }}
-          >
-            {" "}
-            Buy
-          </Button>
+          <Link to="/profile">
+            <div className={styles.sellerInfo}>
+              <div>
+                <div className="primary">Your name</div>
+                <div className="secondary">Status</div>
+              </div>
+              <img
+                className={styles.photo}
+                src="https://38s.musify.club/img/68/22744618/58256306.jpg"
+                alt="icon"
+                height={48}
+              />
+            </div>
+          </Link>
         </div>
       </div>
     </div>

@@ -2,7 +2,10 @@ import { Button } from "antd";
 import Star from "../../../../components/Star/Star";
 import styles from "./ProfileInfo.module.css";
 import CreatePost from "../../../../components/Modals/CreatePost/CreatePost";
-import React from "react";
+import React, { useEffect } from "react";
+import { IRootState, useAppDispatch } from "../../../../store";
+import { getProfile } from "../../../../store/auth/actionCreators";
+import { useSelector } from "react-redux";
 
 const TwoLineInfo = ({
   main,
@@ -22,11 +25,34 @@ const TwoLineInfo = ({
 type ProfileInfoProps = React.MouseEventHandler;
 
 const ProfileInfo = ({ createPost }: { createPost: ProfileInfoProps }) => {
-  const info = [
-    { main: "Status", secondary: "User" },
-    { main: "Email", secondary: "myemail@gmail.com" },
-    { main: "Password", secondary: "password" },
-  ].map((e) => <TwoLineInfo {...e} />);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(()=>{
+    dispatch(getProfile());
+  },[])
+
+  const user = useSelector(
+    (state: IRootState) => state.auth.profileData.profile
+  );
+  
+
+// export interface IUserProfile {
+//   id: number,
+//   firstname: string,
+//   lastname: string,
+//   email: string,
+//   password: string,
+//   registrationDate: string,
+//   balance: number,
+//   rating: number
+// }
+
+
+  const info = user?[
+    { main: "Email", secondary: user.email},
+    { main: "Password", secondary: user.password },
+  ].map((e) => <TwoLineInfo {...e} />):<h1>Loading</h1> 
 
   return (
     <>
@@ -39,9 +65,9 @@ const ProfileInfo = ({ createPost }: { createPost: ProfileInfoProps }) => {
       <div className={styles.infoWrapper}>
         <div className={styles.mainInfoWrapper}>
           <div className="primary">Your name</div>
-          <div className="secondary2">Since 21.12.2003</div>
+          <div className="secondary2">Since {user?.registrationDate.toDateString()}</div>
         </div>
-        <Star rating={4}></Star>
+        <Star rating={user?user.rating:5}></Star>
 
         <hr />
 

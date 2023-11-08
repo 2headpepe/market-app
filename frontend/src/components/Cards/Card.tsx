@@ -4,30 +4,32 @@ import React from "react";
 import "./Cards.css";
 
 export interface CardProps {
+  posts:{
   id: number;
   userId: number;
   title: string;
   city: string;
   postDate: string;
   text: string;
-  images: string[];
   price: number;
+  },
+  images: string[]|null;
 }
-const Card = (props: CardProps) => {
-  const { images, city, title, postDate, text, price, id } = props;
+const Card = ({posts,images}: CardProps) => {
+  const {city, title, postDate, text, price, id } = posts;
   const navigate = useNavigate();
-  function clickHandle(event: React.MouseEvent) {
+  function clickHandle({event,id}: {event:React.MouseEvent,id:number}) {
     if (
       event.target instanceof HTMLElement &&
       event.target.className !== "button"
     ) {
-      navigate("/1/1", { state: props });
+      navigate("/"+id.toString());
     }
   }
   return (
     <div
       className="Card--wrapper"
-      onClick={clickHandle}
+      onClick={(event:React.MouseEvent)=>clickHandle({event,id})}
     >
       <ShowPhoto
         images={images}

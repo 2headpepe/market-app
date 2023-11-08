@@ -1,34 +1,63 @@
 import { Dispatch } from "@reduxjs/toolkit";
-import { ILoginRequest } from "../../api/auth/types";
-import {
-  loginFailure,
-  loginStart,
-  loginSuccess,
-  logoutSuccess,
-} from "./authReducer";
+import { ILoginRequest, IUserProfile } from "../../api/auth/types";
+import { loadProfileFailure, loadProfileStart, loadProfileSuccess, loginFailure, loginStart, loginSuccess, logoutSuccess } from "./authReducer";
 
 import api from "../../api";
 
 export const loginUser =
   (data: ILoginRequest) =>
-  async (dispatch: Dispatch<any>): Promise<void> => {
-    try {
-      dispatch(loginStart());
-      console.log(data)
-      const response = await api.auth.login(data);
-      // const response = { data: { accessToken: "hiii" } };
-      dispatch(loginSuccess(response.data.accessToken));
-      //   dispatch(getProfile());
-    } catch (e: any) {
-      console.log('sfdsfsd');
+    async (dispatch: Dispatch<any>): Promise<void> => {
+      try {
+        dispatch(loginStart())
 
-      console.error(e);
+        const res = await api.auth.login(data)
+        // const res = {data:{accessToken:"234"}}
 
-      dispatch(loginFailure(e.message));
+        dispatch(loginSuccess(res.data.accessToken))
+        // dispatch(getProfile())
+        
+      } catch (e: any) {
+        console.error(e)
+
+        dispatch(loginFailure(e.message))
+      }
     }
-  };
-export const logoutUser =
+
+    export const logoutUser =
   () =>
   async (dispatch: Dispatch): Promise<void> => {
-    dispatch(logoutSuccess());
-  };
+      try {
+        // await api.auth.logout()
+
+        dispatch(logoutSuccess())
+
+        // history.push('/')
+      } catch (e) {
+          console.error(e)
+      }
+  }
+
+  export const getProfile = () =>
+  async (dispatch: Dispatch<any>): Promise<void> => {
+    try {
+      dispatch(loadProfileStart())
+
+      // const res = await api.auth.getProfile()
+      const res = {data:{
+        "id": 0,
+        "firstname": "string",
+        "lastname": "string",
+        "email": "string",
+        "password": "string",
+        "registrationDate": new Date(),
+        "balance": 0,
+        "rating": 0
+      }}
+
+      dispatch(loadProfileSuccess(res.data as IUserProfile))
+    } catch (e: any) {
+      console.error(e)
+
+      dispatch(loadProfileFailure(e.message))
+    }
+  }

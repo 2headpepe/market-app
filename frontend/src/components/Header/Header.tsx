@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./Header.module.css";
 import Search, { SearchProps } from "antd/es/input/Search";
 import { Link } from "react-router-dom";
 import MoneyModal from "../Modals/MoneyModal/MoneyModal";
 import { Button } from "antd";
-import { useDispatch } from "react-redux";
-import { logoutUser } from "../../store/auth/actionCreators";
-import { useAppDispatch } from "../../store";
+import { useDispatch, useSelector } from "react-redux";
+import { getProfile, logoutUser } from "../../store/auth/actionCreators";
+import { IRootState, useAppDispatch } from "../../store";
 
 interface HeaderProps {
   showTitle?: boolean;
@@ -21,11 +21,26 @@ const Header = ({
   showMoney = true,
   showInfo = true,
 }: HeaderProps) => {
+
   const dispatch = useAppDispatch();
+  useEffect(()=>{
+    dispatch(getProfile());
+  },[]);
+
+
+
   const onSearch: SearchProps["onSearch"] = (value, _e, info) =>
     console.log(info?.source, value);
 
   const [moneyModal, setMoneyModal] = React.useState(false);
+
+  const user = useSelector(
+    (state: IRootState) => state.auth.profileData.profile
+  );
+
+
+
+
 
   function handleModal() {
     setMoneyModal((modal) => !modal);
@@ -37,7 +52,7 @@ const Header = ({
   return (
     <nav className={styles.NavBar}>
       <Link
-        to="../main"
+        to="../"
         className={styles.left}
         style={{ opacity: showTitle ? 1 : 0 }}
       >
@@ -51,13 +66,14 @@ const Header = ({
         style={{ opacity: showSearch ? 1 : 0 }}
       ></Search>
 
+      {user?
       <div className={styles.infoWrapper}>
         <div
           className={styles.icon}
           onClick={handleModal}
           style={{ opacity: showMoney ? 1 : 0 }}
         >
-          <div className="primary2">0.00$</div>
+          <div className="primary2">{user.balance}$</div>
         </div>
 
         <Link
@@ -66,8 +82,8 @@ const Header = ({
         >
           <div className={styles.info}>
             <div>
-              <div className="primary">Your name</div>
-              <div className="secondary">Status</div>
+              <div className="primary">{user.firstname}</div>
+              <div className="secondary">{user.lastname}</div>
             </div>
             <img
               className={styles.photo}
@@ -79,7 +95,7 @@ const Header = ({
         </Link>
         <Button onClick={logoutHandle}>LogOut</Button>
       </div>
-
+      : <h1>Loading</h1>}
       <MoneyModal
         modal={moneyModal}
         setModal={setMoneyModal}

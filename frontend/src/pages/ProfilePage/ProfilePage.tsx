@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./ProfilePage.module.css";
-import data from "../../data.js";
+import {data,imagesData} from "../../data.js";
 import PostList from "../../components/PostList/PostList";
 import Card from "../../components/Cards";
 import Header from "../../components/Header/Header";
@@ -9,26 +9,35 @@ import ProfileInfo from "./components/ProfileInfo/ProfileInfo";
 import PhotoModal from "../../components/Modals/PhotoModal/PhotoModal";
 import CreatePost from "../../components/Modals/CreatePost/CreatePost";
 import PostsModal from "../../components/Modals/PostsModal/PostsModal";
-import ExtendedCard from "../../components/Cards";
+import { IRootState, useAppDispatch } from "../../store";
+import { getProfile } from "../../store/auth/actionCreators";
+import { useSelector } from "react-redux";
+import { getMyListings } from "../../store/listings/actionCreators";
+import { getListingImages } from "../../store/images/actionCreators";
+import { getMyBuys, getMySells } from "../../store/orders/actionCreators";
+import ExtendedCard from "./components/ExtendedCard/ExtendedCard";
 
 interface IModal {
   posts: boolean;
   buys: boolean;
 }
 const ProfilePage = () => {
-  const [modal, setModal] = React.useState<IModal>({
-    posts: false,
-    buys: false,
-  });
-
   const [createPostModal, setCreatePostModal] = React.useState(false);
 
-  function onPostsClick() {
-    setModal((state) => ({ ...state, posts: !state.posts }));
-  }
-  function onBuysClick() {
-    setModal((state) => ({ ...state, buys: !state.buys }));
-  }
+  const dispatch = useAppDispatch();
+  useEffect(()=>{
+    dispatch(getMyListings());
+    dispatch(getMySells());
+    dispatch(getMyBuys());
+  },[]);
+  const myListings = useSelector((state: IRootState) => state.listings.myListings.listings)??[];
+ 
+  const mySells = useSelector((state: IRootState) => state.orders.sells.listings)??[];
+
+  const myBuys = useSelector((state: IRootState) => state.orders.buys.listings)??[];
+
+
+
   return (
     //style={{}}
     <div className={styles.profilePageWrapper}>
@@ -40,7 +49,7 @@ const ProfilePage = () => {
       ></Header>
       <div style={{ display: "flex", marginTop: "20px" }}>
         <div className={styles.profileWrapper}>
-          <ProfileInfo
+        <ProfileInfo
             createPost={function (
               event: React.MouseEvent<Element, MouseEvent>
             ): void {
@@ -50,64 +59,19 @@ const ProfilePage = () => {
         </div>
 
         <div>
-          <div className={styles.postsWrapper}>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-around",
-                alignItems: "center",
-                width: "100%",
-              }}
-            >
-              <h2>Your products</h2>
-              <div
-                className={`secondary`}
-                style={{ textDecoration: "underline", cursor: "pointer" }}
-                onClick={onPostsClick}
-              >
-                Show more
-              </div>
-            </div>
-            <hr />
-            <Card {...data[0]}></Card>
-          </div>
-
-          <div className={styles.postsWrapper}>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-around",
-                alignItems: "center",
-                width: "100%",
-              }}
-            >
-              <h2>Your buys</h2>
-              <div
-                className={`secondary`}
-                style={{ textDecoration: "underline", cursor: "pointer" }}
-                onClick={onBuysClick}
-              >
-                Show more
-              </div>
-            </div>
-            <hr />
-            <Card {...data[0]}></Card>
-          </div>
+          <ExtendedCard listings={myListings} title={"Your products"}></ExtendedCard>
+          <ExtendedCard listings={myBuys} title={"Your buys"}></ExtendedCard>
+          <ExtendedCard listings={mySells} title={"Your sells"}></ExtendedCard>
         </div>
       </div>
 
-      <PostsModal
-        posts={data}
-        modal={modal.posts}
-        setModal={onPostsClick}
-        header="Your products"
-      ></PostsModal>
-      <PostsModal
+      
+      {/* <PostsModal
         posts={data}
         modal={modal.buys}
         setModal={onBuysClick}
         header="Your buys"
-      ></PostsModal>
+      ></PostsModal> */}
 
       {/* <Modal
         modal={modal.posts}

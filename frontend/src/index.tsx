@@ -35,16 +35,9 @@ const App = () => (
         path="/login"
         element={<LoginPage />}
       ></Route>
+     
       <Route
-        path="main"
-        element={
-          <PrivateRoute>
-            <LandingPage />
-          </PrivateRoute>
-        }
-      ></Route>
-      <Route
-        path="profile"
+        path="/profile"
         element={
           <PrivateRoute>
             <ProfilePage />
@@ -57,9 +50,17 @@ const App = () => (
       ></Route>
 
       <Route
-        path="admin"
+        path="/admin"
         element={<AdminPage />}
-      ></Route>
+      ></Route> 
+      <Route
+      path="*"
+      element={
+        <PrivateRoute>
+          <LandingPage />
+        </PrivateRoute>
+      }
+    ></Route>
     </Routes>
   </BrowserRouter>
 );

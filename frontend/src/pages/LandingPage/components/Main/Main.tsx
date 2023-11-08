@@ -1,5 +1,5 @@
 import React from "react";
-import data from "../../../../data";
+import {data} from "../../../../data";
 import Select from "react-select";
 import styles from "./Main.module.css";
 import PostList from "../../../../components/PostList/PostList";
@@ -9,7 +9,10 @@ const options = [
   { value: "3", label: "3" },
 ];
 const Main = () => {
-  const [posts, setPosts] = React.useState(data);
+  // /api/v1/listings/search (null,null,null)
+  // images
+  const posts = data;
+
   const [sortBy, setSortBy] = React.useState("");
   const [filterBy, setFilterBy] = React.useState("");
 
@@ -49,7 +52,7 @@ const Main = () => {
         />
       </div>
       <div className={styles.postListWrapper}>
-        <PostList posts={posts}></PostList>
+        <PostList posts={posts} images={{}}></PostList>
       </div>
       {pages.map((e) => (
         <span>{e} </span>

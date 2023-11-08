@@ -17,7 +17,7 @@ const LoginPage: React.FC = () => {
   function loginHandle(values: { email: string; password: string }) {
     console.log(values);
     dispatch(loginUser(values));
-    navigate("/main");
+    navigate("..");
   }
   return (
     <div className={styles.LoginPage}>
