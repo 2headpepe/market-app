@@ -13,7 +13,7 @@ const options = [
 const Main = () => {
   // /api/v1/listings/search (null,null,null)
   // images
-  const posts = useSelector((state:IRootState)=>state.listings)
+  const posts = useSelector((state:IRootState)=>state.listings.allListings.listings)
 
   const [sortBy, setSortBy] = React.useState("");
   const [filterBy, setFilterBy] = React.useState("");
@@ -27,11 +27,11 @@ const Main = () => {
     setFilterBy(selected!.value);
   };
 
-  const pageNumber = Math.ceil(posts.length / 3);
-  const pages = [];
-  for (let i = 1; i <= pageNumber; ++i) {
-    pages.push(i);
-  }
+  // const pageNumber = Math.ceil(posts.length / 3);
+  // const pages = [];
+  // for (let i = 1; i <= pageNumber; ++i) {
+  //   pages.push(i);
+  // }
   return (
     <div className={styles.mainWrapper}>
       <div className={styles.sortWrapper}>
@@ -54,11 +54,11 @@ const Main = () => {
         />
       </div>
       <div className={styles.postListWrapper}>
-        <PostList posts={posts} images={{}}></PostList>
+        <PostList posts={posts??[]} images={{}}></PostList>
       </div>
-      {pages.map((e) => (
+      {/* {pages.map((e) => (
         <span key={e}>{e} </span>
-      ))}
+      ))} */}
     </div>
   );
 };

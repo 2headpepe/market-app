@@ -1,5 +1,5 @@
 import { Dispatch } from "@reduxjs/toolkit"
-import { ListingsAction, buyListingFailure, createListingFailure, deleteListingFailure, getListingFailure, getListingStart, getListingSuccess, getMyFailure, getMyStart, getMySuccess, getUserListingsFailure, getUserListingsStart, getUserListingsSuccess } from "./listingsReducer"
+import { ListingsAction, buyListingFailure, createListingFailure, deleteListingFailure, getListingFailure, getListingStart, getListingSuccess, getMyFailure, getMyStart, getMySuccess, getUserListingsFailure, getUserListingsStart, getUserListingsSuccess, searchListingsFailure, searchListingsStart, searchListingsSuccess } from "./listingsReducer"
 import { IBuyListingRequest, ICreateListingRequest, IDeleteListingRequest, IGetListingRequest, IGetUserListingsRequest, IListings, ISearchListingsRequest } from "../../api/listings/types";
 import api from "../../api";
 
@@ -72,9 +72,9 @@ async (dispatch: Dispatch<any>): Promise<void> => {
 export const searchListings = (data:ISearchListingsRequest) =>
 async (dispatch: Dispatch<any>): Promise<void> => {
   try {
-    dispatch(searchListingsStart(data));
+    dispatch(searchListingsStart());
 
-    const result = (await api.listings.getUserListings(data)).data ;
+    const result = (await api.listings.searchListings(data)).data ;
 
     dispatch(searchListingsSuccess({listings:result}))
   } catch (e: any) {
