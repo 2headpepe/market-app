@@ -1,6 +1,5 @@
-export interface IGetBuysResponse {
-    listings:IListings;
-}
+export type IGetBuysResponse = IListings;
+
 
 export type IGetSellsResponse = IGetBuysResponse;
 export interface IListing
