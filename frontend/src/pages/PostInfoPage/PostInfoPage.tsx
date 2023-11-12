@@ -66,7 +66,7 @@ const PostInfoPage = () => {
           <CategoryBadge
             //   width={"200px"}
             height={"40px"}
-            id={"Electronics"}
+            id={0}
           >
             Clothes
           </CategoryBadge>

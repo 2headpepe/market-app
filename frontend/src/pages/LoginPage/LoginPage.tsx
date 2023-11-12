@@ -1,24 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { Button, Form, Input } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 
 import styles from "./LoginPage.module.css";
 import { loginUser } from "../../store/auth/actionCreators";
-import { useAppDispatch } from "../../store";
+import { IRootState, useAppDispatch } from "../../store";
 import { Dispatch } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
 
 const LoginPage: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const role= useSelector((state:IRootState)=>state.auth.authData.role)
   // useSelector(console.log );
 
   function loginHandle(values: { email: string; password: string }) {
-    console.log(values);
+    // console.log(values);
     dispatch(loginUser(values));
-    navigate("..");
   }
+
+  useEffect(()=>{
+    if(role==='ADMIN'){
+      navigate('/admin');
+    }
+    if(role==='USER'){
+      navigate('/')
+    }
+  },[role]);
   return (
     <div className={styles.LoginPage}>
       <div className={styles.formWrapper}>

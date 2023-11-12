@@ -19,6 +19,12 @@ import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import PostInfoPage from "./pages/PostInfoPage/PostInfoPage";
 import CategoryBadge from "./components/CategoryBadge/CategoryBadge";
 import AdminPage from "./pages/AdminPage/AdminPage";
+import AdminUsersPage from "./pages/AdminPage/pages/AdminUsersPage/AdminUsersPage";
+import AdminWithdrawsPage from "./pages/AdminPage/pages/AdminWithdrawsPage/AdminWithdrawsPage";
+import AdminDepositsPage from "./pages/AdminPage/pages/AdminDepositsPage/AdminDepositsPage";
+import AdminCategoriesPage from "./pages/AdminPage/pages/AdminCategoriesPage/AdminCategoriesPage";
+import Header from "./components/Header/Header";
+
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -51,8 +57,14 @@ const App = () => (
 
       <Route
         path="/admin"
-        element={<AdminPage />}
-      ></Route> 
+        element={<PrivateRoute><AdminPage /></PrivateRoute>}
+      >
+        <Route path="users" element={<PrivateRoute><AdminUsersPage/></PrivateRoute>}/>
+        <Route path="categories" element={<PrivateRoute><AdminCategoriesPage/></PrivateRoute>}/>
+        <Route path="withdraws" element={<PrivateRoute><AdminWithdrawsPage/></PrivateRoute>}/>
+        <Route path="deposits" element={<PrivateRoute><AdminDepositsPage/></PrivateRoute>}/>
+        {/* <Route path="" element={<PrivateRoute><AdminPage /></PrivateRoute>}></Route>           */}
+      </Route> 
       <Route
       path="*"
       element={

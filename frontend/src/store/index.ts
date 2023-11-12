@@ -5,6 +5,8 @@ import authReducer from "./auth/authReducer";
 import listingsReducer from "./listings/listingsReducer";
 import imagesReducer from "./images/imagesReducer";
 import ordersReducer from "./orders/ordersReducer";
+import adminReducer from "./admin/adminReducer";
+import categoryReducer from "./category/categoryReducer";
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +14,8 @@ export const store = configureStore({
     listings:listingsReducer,
     images:imagesReducer,
     orders:ordersReducer,
+    admin:adminReducer,
+    category:categoryReducer
     // user: user,
   },
   middleware: (getDefaultMiddleware) =>

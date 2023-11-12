@@ -65,31 +65,6 @@ const ProfilePage = () => {
         </div>
       </div>
 
-      
-      {/* <PostsModal
-        posts={data}
-        modal={modal.buys}
-        setModal={onBuysClick}
-        header="Your buys"
-      ></PostsModal> */}
-
-      {/* <Modal
-        modal={modal.posts}
-        setModal={onPostsClick}
-      >
-        <h1>Posts</h1>
-        <hr />
-        <PostList {...data}></PostList>
-      </Modal> */}
-      {/* <Modal
-        modal={modal.buys}
-        setModal={onBuysClick}
-      >
-        <h1>Buys</h1>
-        <hr />
-        <PostList {...data}></PostList>
-      </Modal> */}
-
       <CreatePost
         modal={createPostModal}
         setModal={setCreatePostModal}

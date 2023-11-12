@@ -1,31 +1,41 @@
 import React from "react";
 
 import { Button, Form, Input } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import styles from "./RegisterPage.module.css";
+import { ILoginRequest, IRegisterRequest } from "../../api/auth/types";
+import { IRootState, useAppDispatch } from "../../store";
+import { loginUser, registerUser } from "../../store/auth/actionCreators";
+import { useSelector } from "react-redux";
 
 function RegisterPage() {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const token = useSelector((state:IRootState)=>state.auth.authData.accessToken);
+
+  function registerHandle(values: IRegisterRequest) {
+
+    dispatch(registerUser(values)).then(() => navigate("/"));
+  }
   return (
     <div className={styles.RegisterPage}>
       <div className={styles.formWrapper}>
-        <Form layout="vertical">
+        <Form layout="vertical" onFinish={registerHandle}>
           <Form.Item
             label="First Name"
-            name="firstName"
+            name="firstname"
+            rules={[{ required: true, message: "Please input your first name" }]}
+
           >
             <Input />
           </Form.Item>
 
           <Form.Item
-            label="Second Name"
-            name="secondName"
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            label="Birthdate"
-            name="birthdate"
+            label="Last Name"
+            name="lastname"
+            rules={[{ required: true, message: "Please input your last name" }]}
+
           >
             <Input />
           </Form.Item>

@@ -3,6 +3,8 @@ import {data} from "../../../../data";
 import Select from "react-select";
 import styles from "./Main.module.css";
 import PostList from "../../../../components/PostList/PostList";
+import { IRootState } from "../../../../store";
+import { useSelector } from "react-redux";
 const options = [
   { value: "1", label: "1" },
   { value: "2", label: "2" },
@@ -11,7 +13,7 @@ const options = [
 const Main = () => {
   // /api/v1/listings/search (null,null,null)
   // images
-  const posts = data;
+  const posts = useSelector((state:IRootState)=>state.listings)
 
   const [sortBy, setSortBy] = React.useState("");
   const [filterBy, setFilterBy] = React.useState("");
@@ -55,7 +57,7 @@ const Main = () => {
         <PostList posts={posts} images={{}}></PostList>
       </div>
       {pages.map((e) => (
-        <span>{e} </span>
+        <span key={e}>{e} </span>
       ))}
     </div>
   );
