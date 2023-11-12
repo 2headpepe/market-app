@@ -1,8 +1,11 @@
 import { Dispatch } from "@reduxjs/toolkit";
-import { ILoginRequest, IUserProfile } from "../../api/auth/types";
-import { loadProfileFailure, loadProfileStart, loadProfileSuccess, loginFailure, loginStart, loginSuccess, logoutSuccess } from "./authReducer";
+import { ILoginRequest, ILoginResponse, IRegisterRequest, IUserProfile } from "../../api/auth/types";
+import { loadProfileFailure, loadProfileStart, loadProfileSuccess, loginFailure, loginStart, loginSuccess, logoutSuccess, registerFailure, registerStart, registerSuccess } from "./authReducer";
 
 import api from "../../api";
+import { useNavigate } from "react-router-dom";
+import { AxiosPromise } from "axios";
+import { store } from "..";
 
 export const loginUser =
   (data: ILoginRequest) =>
@@ -12,10 +15,11 @@ export const loginUser =
 
         const res = await api.auth.login(data)
         // const res = {data:{accessToken:"234"}}
+        // console.log(res.data['access_token'])
+        dispatch(loginSuccess({access_token:res.data['access_token'],role:res.data.role}))
 
-        dispatch(loginSuccess(res.data.accessToken))
         // dispatch(getProfile())
-        
+
       } catch (e: any) {
         console.error(e)
 
@@ -23,9 +27,33 @@ export const loginUser =
       }
     }
 
-    export const logoutUser =
+export const registerUser =
+  (data: IRegisterRequest) =>
+    async (dispatch: Dispatch<any>): Promise<void> => {
+      try {
+        dispatch(registerStart())
+
+        const res = await api.auth.register(data)
+        // const res = {data:{accessToken:"234"}}
+        // console.log(res.data['access_token'])
+        dispatch(registerSuccess(res.data['access_token']));
+
+        // const loginData = {email:data.email,password:data.password};
+
+        // dispatch(getProfile())
+
+      } catch (e: any) {
+        console.error(e)
+
+        dispatch(registerFailure(e.message))
+      }
+    }
+
+
+
+export const logoutUser =
   () =>
-  async (dispatch: Dispatch): Promise<void> => {
+    async (dispatch: Dispatch): Promise<void> => {
       try {
         // await api.auth.logout()
 
@@ -33,26 +61,17 @@ export const loginUser =
 
         // history.push('/')
       } catch (e) {
-          console.error(e)
+        console.error(e)
       }
-  }
+    }
 
-  export const getProfile = () =>
+export const getProfile = () =>
   async (dispatch: Dispatch<any>): Promise<void> => {
     try {
       dispatch(loadProfileStart())
 
-      // const res = await api.auth.getProfile()
-      const res = {data:{
-        "id": 0,
-        "firstname": "string",
-        "lastname": "string",
-        "email": "string",
-        "password": "string",
-        "registrationDate": new Date(),
-        "balance": 0,
-        "rating": 0
-      }}
+      const res = await api.auth.getProfile()
+      
 
       dispatch(loadProfileSuccess(res.data as IUserProfile))
     } catch (e: any) {
@@ -61,3 +80,19 @@ export const loginUser =
       dispatch(loadProfileFailure(e.message))
     }
   }
+
+// let refreshTokenRequest: AxiosPromise<ILoginResponse> | null = null
+
+export const getAccessToken =
+  () =>
+    async (dispatch: Dispatch<any>): Promise<string | null> => {
+      try {
+        const accessToken = store.getState().auth.authData.accessToken
+
+        return accessToken
+      } catch (e) {
+        console.error(e)
+
+        return null
+      }
+    }
