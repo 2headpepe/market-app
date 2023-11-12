@@ -42,13 +42,13 @@ const colors = [
 ];
 
 interface CategoryBadgeProps {
-  id: string;
+  id: number;
   width?: string;
   height?: string;
   children: JSX.Element | JSX.Element[] | string;
 }
 const CategoryBadge = ({ width, height, children, id }: CategoryBadgeProps) => {
-  const e = colors[category.indexOf(id)];
+  const e = colors[id%colors.length];
   return (
     <div>
       <div

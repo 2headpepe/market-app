@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import styles from "./Header.module.css";
 import Search, { SearchProps } from "antd/es/input/Search";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MoneyModal from "../Modals/MoneyModal/MoneyModal";
 import { Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,6 +13,7 @@ interface HeaderProps {
   showSearch?: boolean;
   showMoney?: boolean;
   showInfo?: boolean;
+  title?:string;
 }
 
 const Header = ({
@@ -20,6 +21,7 @@ const Header = ({
   showSearch = true,
   showMoney = true,
   showInfo = true,
+  title,
 }: HeaderProps) => {
 
   const dispatch = useAppDispatch();
@@ -37,7 +39,7 @@ const Header = ({
   const user = useSelector(
     (state: IRootState) => state.auth.profileData.profile
   );
-
+    console.log(user)
 
 
 
@@ -45,8 +47,10 @@ const Header = ({
   function handleModal() {
     setMoneyModal((modal) => !modal);
   }
+  const navigate = useNavigate();
   function logoutHandle() {
     dispatch(logoutUser());
+    navigate("/login");
     
   }
   return (
@@ -56,7 +60,7 @@ const Header = ({
         className={styles.left}
         style={{ opacity: showTitle ? 1 : 0 }}
       >
-        <h1>MegaMarket</h1>
+        <h1>{title??'MegaMarket'}</h1>
       </Link>
 
       <Search
