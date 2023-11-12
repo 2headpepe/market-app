@@ -8,7 +8,7 @@ RUN npm install
 # Копируем исходный код в контейнер
 COPY . .
 # Собираем приложение
-RUN npm run build
+RUN npm run start
 # Запускаем приложение на порту 3000
 EXPOSE 3000
 CMD [ "npm", "start" ]
