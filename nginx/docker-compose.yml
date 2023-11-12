@@ -1,0 +1,13 @@
+version: '3'
+services:
+  nginx:
+    build:
+      context: . # Укажите путь к каталогу с Dockerfile и nginx.conf
+      dockerfile: Dockerfile
+    ports:
+      - 8080:80
+
+networks:
+  default:
+    external:
+      name: net
